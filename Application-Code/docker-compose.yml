@@ -45,5 +45,6 @@ services:
     ports:
       - "3000:3000"
 
+# For below we are using "Named Volume" which will  be created in /var/lib/docker/volumes/mongo-data/_data
 volumes:
   mongo-data:
