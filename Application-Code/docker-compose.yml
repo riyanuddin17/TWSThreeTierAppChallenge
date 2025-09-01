@@ -9,8 +9,11 @@ services:
       --wiredTigerCacheSizeGB 0.1
       --bind_ip 0.0.0.0
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: riyan
+      MONGO_INITDB_ROOT_PASSWORD: test@12345
+      # For using below create .env file and pass in it so it will directly pick from there
+      # MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     ports:
       - "27017:27017"
     volumes:
@@ -24,8 +27,10 @@ services:
       - mongodb
     environment:
       MONGO_CONN_STR: mongodb://mongodb:27017/todo?directConnection=true
-      MONGO_USERNAME: ${MONGO_USERNAME}
-      MONGO_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_USERNAME: riyan
+      MONGO_PASSWORD: test@12345
+      # MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     ports:
       - "3500:3500"
 
