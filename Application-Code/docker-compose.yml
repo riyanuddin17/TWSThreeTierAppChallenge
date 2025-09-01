@@ -5,9 +5,9 @@ services:
     image: mongo:4.4.6
     container_name: mongodb
     command: >
-      numactl --interleave=all mongod
+      mongod
       --wiredTigerCacheSizeGB 0.1
-      --bind_ip 0.0.0.0
+      --bind_ip 0.0.0.0      
     environment:
       MONGO_INITDB_ROOT_USERNAME: riyan
       MONGO_INITDB_ROOT_PASSWORD: test
