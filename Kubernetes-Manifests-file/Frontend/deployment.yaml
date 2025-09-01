@@ -29,6 +29,6 @@ spec:
         imagePullPolicy: Always
         env:
           - name: REACT_APP_BACKEND_URL
-            value: "http://backend.amanpathakdevops.study/api/tasks"
+            value: "http://backend.amanpathakdevops.study/api/tasks"           # "http://api:3500/api/tasks" You can directly use this to connect backend internally
         ports:
         - containerPort: 3000
