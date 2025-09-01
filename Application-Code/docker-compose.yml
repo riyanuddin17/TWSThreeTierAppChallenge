@@ -17,7 +17,8 @@ services:
       - mongo-data:/data/db
 
   backend:
-    image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/backend:latest
+    build: ./backend
+    image: backend:local
     container_name: backend
     depends_on:
       - mongodb
@@ -29,7 +30,8 @@ services:
       - "3500:3500"
 
   frontend:
-    image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/frontend:latest
+    build: ./frontend
+    image: frontend:local
     container_name: frontend
     depends_on:
       - backend
