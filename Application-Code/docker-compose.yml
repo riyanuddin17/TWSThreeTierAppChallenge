@@ -10,7 +10,7 @@ services:
       --bind_ip 0.0.0.0
     environment:
       MONGO_INITDB_ROOT_USERNAME: riyan
-      MONGO_INITDB_ROOT_PASSWORD: test@12345
+      MONGO_INITDB_ROOT_PASSWORD: test
       # For using below create .env file and pass in it so it will directly pick from there
       # MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
@@ -26,9 +26,9 @@ services:
     depends_on:
       - mongodb
     environment:
-      MONGO_CONN_STR: mongodb://mongodb:27017/todo?directConnection=true
+      MONGO_CONN_STR: mongodb://riyan:test@mongodb:27017/todo
       MONGO_USERNAME: riyan
-      MONGO_PASSWORD: test@12345
+      MONGO_PASSWORD: test
       # MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     ports:
@@ -41,7 +41,7 @@ services:
     depends_on:
       - backend
     environment:
-      REACT_APP_BACKEND_URL: http://backend:3500/api/tasks
+      REACT_APP_BACKEND_URL: http://<ip>:3500/api/tasks                    #Pass the en2 ip
     ports:
       - "3000:3000"
 
