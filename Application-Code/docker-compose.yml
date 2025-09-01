@@ -26,7 +26,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      MONGO_CONN_STR: mongodb://riyan:test@mongodb:27017/todo
+      MONGO_CONN_STR: mongodb://riyan:test@mongodb:27017/admin
       MONGO_USERNAME: riyan
       MONGO_PASSWORD: test
       # MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
