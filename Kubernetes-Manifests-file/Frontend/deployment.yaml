@@ -30,7 +30,9 @@ spec:
         image: frontend:local
         imagePullPolicy: IfNotPresent
         env:
+          # - name: REACT_APP_BACKEND_URL
+          #   value: "http://backend.amanpathakdevops.study/api/tasks"           # "http://api:3500/api/tasks" You can directly use this to connect backend internally
           - name: REACT_APP_BACKEND_URL
-            value: "http://backend.amanpathakdevops.study/api/tasks"           # "http://api:3500/api/tasks" You can directly use this to connect backend internally
+            value: "http://api:3500/api/tasks"        
         ports:
         - containerPort: 3000
