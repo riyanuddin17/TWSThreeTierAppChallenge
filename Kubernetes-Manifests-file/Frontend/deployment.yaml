@@ -27,7 +27,7 @@ spec:
       - name: frontend
         # image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/frontend:latest
         # imagePullPolicy: Always
-        image: frontend:local
+        image: riyanuddin/frontend:latest
         imagePullPolicy: IfNotPresent
         env:
           # - name: REACT_APP_BACKEND_URL
