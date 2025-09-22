@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    environment {
+        NAMESPACE    = 'three-tier'
+    }
+
+    stages {
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Use Jenkins credential that stores your kubeconfig
+                    withKubeConfig([credentialsId: 'test-kops-kubeconfig']) {
+                        sh "kubectl apply -f Kubernetes-Manifests-file/Database/ -n ${NAMESPACE}"
+                    }
+                }
+            }
+        }
+    }
+}
