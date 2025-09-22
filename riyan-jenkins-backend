@@ -30,7 +30,7 @@ pipeline {
                     withDockerRegistry(credentialsId: '241c7517-0bff-4825-af81-251eba028004', toolName: 'docker') {
                         dir('Application-Code/backend') {
                             sh "docker build -t backend ."
-                            sh "docker tag frontend ${DOCKER_IMAGE}"
+                            sh "docker tag backend ${DOCKER_IMAGE}"
                             sh "docker push ${DOCKER_IMAGE}"
                         }
                     }
