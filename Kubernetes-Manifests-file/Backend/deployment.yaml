@@ -7,7 +7,7 @@ metadata:
     role: api
     env: demo
 spec: 
-  replicas: 2
+  replicas: 1
   strategy: 
     type: RollingUpdate
     rollingUpdate:
@@ -27,7 +27,7 @@ spec:
       - name: api
         # image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/backend:latest
         # imagePullPolicy: Always
-        image: backend:local
+        image: riyanuddin/backend:latest
         imagePullPolicy: IfNotPresent        
         env:
           - name: MONGO_CONN_STR
