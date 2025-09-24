@@ -1,12 +1,18 @@
-Jenkins Machine:
+EC2 Requirement:
 
+Jenkins Machine:
 Ubuntu
 AMI: 20.4
 t2.large
+20GB
 
+K8's
+Ubuntu
+worksataion-> t2.micro, with 20 GB
+master-node-> t2..medium
+worker-node-> t2.medium
 
 SonarQube Machine:
-
 Ubuntu 
 AMI: 20.04
 t2.medium
@@ -30,9 +36,6 @@ sudo chown $USER /var/run/docker.sock
 
 SonarQube:
 >> docker run -d -p 9000:9000 sonarqube:lts-community
-
-
-
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -97,14 +100,20 @@ Create First Admin User:
 -> E-mail address
 next next next
 
-
+----------------------------------------------------------------
 INSTALL PLUGIN:
 Manage Jenkins -> Pluggins
 
-Nodejs
+
+Install plugin:
+
 SonarQube scanner
+NodeJS Plugin 1.6.0
+OWASP Dependency-Check 5.4.0
 Docker
 Docker Pipeline
+docker-build-step
+CloudBees Docker Build and Publish
 Kubernetes
 Kubernetes CLI
 --------------------------------------------------------------------------------------------
@@ -119,17 +128,48 @@ echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main |
 sudo apt-get update
 sudo apt-get install trivy
 
+------------------------------------------------------------------------------------------
+
+1) Attach a role to this EC2 with Administrator access.
+
+KOPS Setup Amazon linux:
+
+SIMILAR DOCUMENTATION LINK FOR KOPE SETUPT:"https://medium.com/@veerababu.narni232/how-i-set-up-a-kubernetes-cluster-on-aws-ec2-using-kops-61e7cf0ade6b"
 
 
+2) Aws cli:
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
 
-Install plugin:
 
-SonarQube scanner
-NodeJS Plugin 1.6.0
-OWASP Dependency-Check 5.4.0
-Docker
-Docker Pipeline
-docker-build-step
-CloudBees Docker Build and Publish
-Kubernetes
-Kubernetes CLI
+3) Kops:
+export KOPS_VERSION=v1.28.4
+curl -LO https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64
+chmod +x kops-linux-amd64
+sudo mv kops-linux-amd64 /usr/local/bin/kops
+kops version
+
+4) Create S3 bucket:
+aws s3 mb s3://riyansbucketkops
+aws s3 ls
+export KOPS_STSTE_STORE=s3://riyansbucketkops
+
+5) Kubectl:
+export KUBECTL_VERSION=v1.29.2
+sudo curl --silent --location -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+sudo chmod +x /usr/local/bin/kubectl
+kubectl version
+
+6) In ~ directory run because for kops to create other instance we need to have the public and private keys so that it can ssh:
+>>[~]: ssh-keygen
+
+7) Create the cluster:
+kops create cluster --name=test.k8s.local --zones=us-east-1a,us-east-1b --node-count=2 --node-size=t3.small --master-size=t3.medium --node-volume-size=20 --master-volume-size=20 --yes 
+
+##IT WILL TAKE 10 MINUTES FOR CREATING CLUSTER BECAUSE KOPS HAS ITS OWN VPC, SUBNETS AND ALB AND ALL SO IT WILL TAKE TIME TO CREATE ALL THOSE RESOURCES
+
+
+kops delete cluster --name=test.k8s.local --state=s3://riyansbucketkops --yes
+
+
