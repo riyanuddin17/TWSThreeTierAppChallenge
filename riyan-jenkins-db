@@ -5,6 +5,11 @@ pipeline {
     }
 
     stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/riyanuddin17/TWSThreeTierAppChallenge.git'
+            }
+        }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
