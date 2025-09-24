@@ -51,8 +51,8 @@ kops create cluster \
   --node-count=2 \
   --node-size=t3.medium \
   --master-size=t3.medium \
-  --node-volume-size=8 \
-  --master-volume-size=8 \
+  --node-volume-size=20 \
+  --master-volume-size=20 \
   --yes
 
 
