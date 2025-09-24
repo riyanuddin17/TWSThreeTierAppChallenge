@@ -178,3 +178,10 @@ kops create cluster --name=test.k8s.local --zones=us-east-1a,us-east-1b --node-c
 kops delete cluster --name=test.k8s.local --state=s3://riyansbucketkops --yes
 
 
+Check data in MongoDB:
+kubectl exec -it mongodb-59797b688c-z54t6 -n three-tier -- mongo
+show dbs
+use todo
+show collections
+db.tasks.find().pretty()
+
