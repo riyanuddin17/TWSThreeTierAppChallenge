@@ -1,0 +1,135 @@
+Jenkins Machine:
+
+Ubuntu
+AMI: 20.4
+t2.large
+
+
+SonarQube Machine:
+
+Ubuntu 
+AMI: 20.04
+t2.medium
+Storage: 15GB
+
+-------------------------------
+1)..... Install DOCKER on Jenkins machine:
+
+sudo apt-get update
+sudo apt install docker.io
+docker ps
+sudo chown $USER /var/run/docker.sock
+
+--------------------------------------------------------------------------------------------------------------
+
+2).... Install Docker on SonarQube machine:
+
+>> <install docker with above commands>
+
+>> sudo apt-get update
+
+SonarQube:
+>> docker run -d -p 9000:9000 sonarqube:lts-community
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+3).... JENKINS install on Jenkins machine:
+
+Run on machine java
+op:
+>> sudo apt install openjdk-17-jre-headless -y         --> USE THIS
+ci/cd or automation -> release tool
+
+(or)
+
+0. Install JAVA:
+>> sudo apt update
+>> sudo apt install fontconfig openjdk-21-jre
+>> sudo apt install openjdk-11-jdk
+
+
+1.
+Jenkins Installation:
+1) Type on Google "Jenkins installation on amazon linux"
+
+2) click on Jenkins on AWS(https://www.jenkins.io)
+
+3) click on "Installing Jenkins" -> "Linux" -> "Debian/Ubuntu" 
+
+Direct link to the above page: "https://www.jenkins.io/doc/book/installing/linux/#debianubuntu"
+
+4) Under "Long Term Support release" you will find links just run those
+
+PUT THIS IN BASH SCRIPT AND EXECUTE TO MAKE IT SIMPLE:
+
+>> sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+>> echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+>> sudo apt-get update
+>> sudo apt-get install Jenkins
+>> sudo systemctl enable Jenkins
+
+To check  whether Jenkins is running :
+>> netstat -ntpl
+
+2.
+Now access Jenkins:
+1)<ip>:8080
+2) set password:
+/var/lib/Jenkins/secrets/initialAdminPassword
+3) cat /var/lib/Jenkins/secrets/initialAdminPassword
+
+3.
+Customize Jenkins:
+select "Install suggested plugins"
+
+4.
+Create First Admin User:
+-> Username
+-> Password
+-> Confirm password
+-> Full name
+-> E-mail address
+next next next
+
+
+INSTALL PLUGIN:
+Manage Jenkins -> Pluggins
+
+Nodejs
+SonarQube scanner
+Docker
+Docker Pipeline
+Kubernetes
+Kubernetes CLI
+--------------------------------------------------------------------------------------------
+
+4)...Trivy install on Jenkins machine:
+
+Install Trivy:https://trivy.dev/v0.18.3/installation/
+
+sudo apt-get install wget apt-transport-https gnupg lsb-release
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy
+
+
+
+
+Install plugin:
+
+SonarQube scanner
+NodeJS Plugin 1.6.0
+OWASP Dependency-Check 5.4.0
+Docker
+Docker Pipeline
+docker-build-step
+CloudBees Docker Build and Publish
+Kubernetes
+Kubernetes CLI
