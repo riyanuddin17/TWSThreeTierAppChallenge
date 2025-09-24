@@ -68,14 +68,14 @@ Direct link to the above page: "https://www.jenkins.io/doc/book/installing/linux
 
 PUT THIS IN BASH SCRIPT AND EXECUTE TO MAKE IT SIMPLE:
 
->> sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
   https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
->> echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
->> sudo apt-get update
->> sudo apt-get install Jenkins
->> sudo systemctl enable Jenkins
+sudo apt update
+sudo apt install jenkins
+sudo systemctl enable Jenkins
 
 To check  whether Jenkins is running :
 >> netstat -ntpl
