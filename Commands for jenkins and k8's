@@ -76,6 +76,8 @@ echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
 sudo apt update
 sudo apt install jenkins
 sudo systemctl enable Jenkins
+sudo usermod -aG docker jenkins
+
 
 To check  whether Jenkins is running :
 >> netstat -ntpl
