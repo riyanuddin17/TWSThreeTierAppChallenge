@@ -167,7 +167,7 @@ kubectl version
 >>[~]: ssh-keygen
 
 7) Create the cluster:
-kops create cluster --name=test.k8s.local --zones=us-east-1a,us-east-1b --node-count=2 --node-size=t3.small --master-size=t3.medium --node-volume-size=20 --master-volume-size=20 --yes 
+kops create cluster --name=test.k8s.local --zones=us-east-1a,us-east-1b --node-count=2 --node-size=t2..medium --master-size=t2..medium --node-volume-size=20 --master-volume-size=20 --yes 
 
 ##IT WILL TAKE 10 MINUTES FOR CREATING CLUSTER BECAUSE KOPS HAS ITS OWN VPC, SUBNETS AND ALB AND ALL SO IT WILL TAKE TIME TO CREATE ALL THOSE RESOURCES
 
