@@ -61,7 +61,7 @@ pipeline {
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image ${DOCKER_IMAGE} > trivyimage.txt" 
+                sh "trivy image ${DOCKER_IMAGE} > trivyimage_frontend.txt" 
             }
         }
 
