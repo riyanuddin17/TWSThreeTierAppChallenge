@@ -41,9 +41,12 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         } 
+
         stage('TRIVY FS SCAN') {
             steps {
-                sh "trivy fs . > trivyfs.txt"
+                dir('Application-Code/frontend') {
+                    sh "trivy fs . > trivyfs_frontend.txt"
+                }
             }
         }
         stage('Docker Build & Push Frontend') {
