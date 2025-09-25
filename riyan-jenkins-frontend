@@ -5,6 +5,7 @@ pipeline {
     }
 
     environment {
+        SCANNER_HOME = tool 'SonarScanner'
         DOCKER_IMAGE = 'riyanuddin/frontend:latest'
         NAMESPACE    = 'three-tier'
     }
@@ -16,6 +17,17 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh """
+                        ${SCANNER_HOME}/bin/sonar-scanner \
+                          -Dsonar.projectKey=three-tier \
+                          -Dsonar.sources=.
+                    """
+                }
+            }
+        }
         stage('Build Frontend') {
             steps {
                 dir('Application-Code/frontend') {
