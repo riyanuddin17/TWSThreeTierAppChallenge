@@ -18,6 +18,9 @@ AMI: 20.04
 t2.medium
 Storage: 15GB
 
+Install deocker and run sonarqube as container:
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+
 -------------------------------
 1)..... Install DOCKER on Jenkins machine:
 
