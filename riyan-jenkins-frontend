@@ -64,6 +64,7 @@ pipeline {
                 sh "trivy image ${DOCKER_IMAGE} > trivyimage.txt" 
             }
         }
+
         stage('Deploy to Kubernetes') {
             steps {
                 script {
