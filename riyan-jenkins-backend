@@ -37,6 +37,11 @@ pipeline {
                 }
             }
         }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image ${DOCKER_IMAGE} > trivyimage_backend.txt" 
+            }
+        }
 
         stage('Deploy to Kubernetes') {
             steps {
