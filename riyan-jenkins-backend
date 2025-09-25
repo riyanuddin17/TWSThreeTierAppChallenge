@@ -23,6 +23,13 @@ pipeline {
                 }
             }
         }
+        stage('TRIVY FS SCAN') {
+            steps {
+                dir('Application-Code/backend') {
+                    sh "trivy fs . > trivyfs_backend.txt"
+                }
+            }
+        }
 
         stage('Docker Build & Push Backend') {
             steps {
@@ -42,7 +49,6 @@ pipeline {
                 sh "trivy image ${DOCKER_IMAGE} > trivyimage_backend.txt" 
             }
         }
-
         stage('Deploy to Kubernetes') {
             steps {
                 script {
