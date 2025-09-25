@@ -35,7 +35,11 @@ pipeline {
                 }
             }
         }
-
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
         stage('Docker Build & Push Frontend') {
             steps {
                 script {
@@ -47,6 +51,11 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image ${DOCKER_IMAGE} > trivyimage.txt" 
             }
         }
 
